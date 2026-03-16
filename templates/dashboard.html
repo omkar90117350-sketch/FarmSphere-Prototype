@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — FarmSphere{% endblock %}
+{% block head %}<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div class="section-label">Overview</div>
+    <h1 class="page-title">Farm Dashboard</h1>
+    <p class="page-subtitle">Live agricultural intelligence at a glance.</p>
+</div>
+
+<div class="container">
+    <!-- Stat cards -->
+    <div class="stats-grid" id="statsGrid">
+        <div class="stat-card" style="--accent:#22c55e">
+            <div class="sc-icon">🌡️</div>
+            <div class="sc-label">Temperature</div>
+            <div class="sc-value" id="dashTemp">--°C</div>
+            <div class="sc-sub"  id="dashFeels">Feels like --</div>
+        </div>
+        <div class="stat-card" style="--accent:#38bdf8">
+            <div class="sc-icon">💧</div>
+            <div class="sc-label">Humidity</div>
+            <div class="sc-value" id="dashHumid">--%</div>
+            <div class="sc-sub"  id="dashWind">Wind: -- km/h</div>
+        </div>
+        <div class="stat-card" style="--accent:#fbbf24">
+            <div class="sc-icon">🌧️</div>
+            <div class="sc-label">Rain Chance</div>
+            <div class="sc-value" id="dashRain">--%</div>
+            <div class="sc-sub"  id="dashCond">Loading…</div>
+        </div>
+        <div class="stat-card" style="--accent:#a78bfa">
+            <div class="sc-icon">📈</div>
+            <div class="sc-label">Prediction Accuracy</div>
+            <div class="sc-value">94.2%</div>
+            <div class="sc-sub">ML model</div>
+        </div>
+    </div>
+
+    <!-- Charts row -->
+    <div class="charts-row">
+        <div class="card">
+            <div class="card-title">Market Trends — ₹/Quintal</div>
+            <div class="card-sub">Monthly price index</div>
+            <canvas id="marketChart" height="210"></canvas>
+        </div>
+        <div class="card">
+            <div class="card-title">Crop Analytics</div>
+            <div class="card-sub">Health distribution</div>
+            <canvas id="cropChart" height="210"></canvas>
+        </div>
+    </div>
+
+    <!-- Bottom row -->
+    <div class="bottom-row">
+        <div class="card">
+            <div class="card-title" style="margin-bottom:14px">⚡ Quick Actions</div>
+            <div class="quick-actions">
+                <a href="/disease-diagnosis" class="qa-btn">🔬 Diagnose Disease</a>
+                <a href="/weather"           class="qa-btn">🌦️ Weather Forecast</a>
+                <a href="/price-prediction"  class="qa-btn">💰 Predict Price</a>
+                <a href="/chatbot"           class="qa-btn">🤖 Ask FarmBot</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title" style="margin-bottom:14px">🧠 AI Insights</div>
+            <div id="aiInsights" class="insights-list">
+                <div class="insight-item green">🌱 Plant Wheat in Rabi season for 15% higher yield</div>
+                <div class="insight-item amber">⚠️ Rain expected — delay fertilizer application 48hr</div>
+                <div class="insight-item blue">📈 Cotton prices trending up — good planting window</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title" style="margin-bottom:14px">🌾 Market Pulse</div>
+            <div id="marketPulse"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

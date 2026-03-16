@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}FarmBot — FarmSphere{% endblock %}
+{% block content %}
+<div style="padding:40px 24px 16px;max-width:1280px;margin:0 auto">
+    <div class="section-label">AI Chatbot</div>
+    <h1 class="page-title" style="font-size:2rem;margin-bottom:4px">FarmBot</h1>
+    <p style="color:var(--muted);font-size:.875rem">Powered by Gemini AI · Ask anything about farming</p>
+</div>
+
+<div style="max-width:1280px;margin:0 auto;padding:0 24px 48px;display:grid;grid-template-columns:260px 1fr;gap:20px">
+    <!-- Sidebar -->
+    <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                <div class="bot-av">🤖</div>
+                <div>
+                    <div style="font-weight:700;font-size:.9rem">FarmBot AI</div>
+                    <div style="display:flex;align-items:center;gap:5px;font-size:.75rem;color:var(--green-400)">
+                        <span class="live-dot"></span>Online
+                    </div>
+                </div>
+            </div>
+            <p style="font-size:.8rem;color:var(--muted);line-height:1.6">Expert assistant for crops, diseases, fertilizers, weather, and market prices.</p>
+        </div>
+
+        <div class="card">
+            <div class="section-label" style="margin-bottom:10px">Quick Questions</div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+                <button class="qq-btn" onclick="askBot('How do I treat tomato late blight?')">🍅 Treat tomato blight?</button>
+                <button class="qq-btn" onclick="askBot('Best fertilizer for wheat?')">🌾 Wheat fertilizer?</button>
+                <button class="qq-btn" onclick="askBot('How to control aphids naturally?')">🐛 Control aphids?</button>
+                <button class="qq-btn" onclick="askBot('When to sell wheat for best price?')">💰 Best time to sell?</button>
+                <button class="qq-btn" onclick="askBot('How to improve soil health?')">🌍 Improve soil health?</button>
+                <button class="qq-btn" onclick="askBot('Drip vs flood irrigation pros cons')">💧 Drip vs flood irrigation?</button>
+            </div>
+        </div>
+
+        <button class="btn btn-ghost" style="width:100%" onclick="clearChat()">🗑️ Clear Chat</button>
+    </div>
+
+    <!-- Chat window -->
+    <div class="chat-window card" style="padding:0;display:flex;flex-direction:column;height:75vh;min-height:480px">
+        <div class="chat-header">
+            <div class="bot-av">🤖</div>
+            <div>
+                <div style="font-weight:700;font-size:.95rem">FarmBot AI Assistant</div>
+                <div style="display:flex;align-items:center;gap:5px;font-size:.75rem;color:var(--green-400)">
+                    <span class="live-dot"></span>Ready to help
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg bot-msg">
+                <div class="msg-av">🤖</div>
+                <div>
+                    <div class="msg-bubble">
+                        👋 <strong>Welcome to FarmBot!</strong><br><br>
+                        I'm your AI farming expert. Ask me about:<br>
+                        🌿 Crop diseases &amp; treatment<br>
+                        💧 Irrigation &amp; water management<br>
+                        🌱 Fertilizer recommendations<br>
+                        🐛 Pest &amp; weed control<br>
+                        💰 Market prices &amp; timing<br><br>
+                        Ask in <strong>English, Hindi, or Marathi!</strong>
+                    </div>
+                    <div class="msg-time">FarmBot · Just now</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-row">
+            <textarea id="chatInput" class="chat-textarea" placeholder="Ask about diseases, fertilizers, prices…" rows="1"></textarea>
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/chatbot.js"></script>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Disease Diagnosis — FarmSphere{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div class="section-label">AI Vision</div>
+    <h1 class="page-title">Crop Disease Detection</h1>
+    <p class="page-subtitle">Upload a leaf photo for instant AI diagnosis, treatment plan, and fertilizer recommendations.</p>
+</div>
+
+<div class="container">
+    <div class="two-col">
+        <!-- Upload panel -->
+        <div class="card" id="uploadPanel">
+            <div class="card-title" style="margin-bottom:20px">📷 Upload Leaf Image</div>
+
+            <div class="upload-zone" id="uploadZone">
+                <input type="file" id="leafInput" accept="image/*" hidden>
+                <div class="uz-idle" id="uzIdle">
+                    <div class="uz-icon">🍃</div>
+                    <div class="uz-title">Drop image here or click to browse</div>
+                    <div class="uz-sub">JPG, PNG, WEBP · Max 16 MB</div>
+                    <button class="btn btn-primary" style="margin-top:16px" onclick="document.getElementById('leafInput').click()">Select Image</button>
+                </div>
+                <div class="uz-preview" id="uzPreview" style="display:none">
+                    <img id="previewImg" src="" alt="Leaf preview">
+                    <div class="uz-preview-bar">
+                        <span style="font-size:.85rem;color:var(--green-300)">Image ready</span>
+                        <button class="btn-sm" onclick="resetUpload()">✕ Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="analyzeBtn" style="width:100%;margin-top:16px" disabled onclick="analyzeDisease()">
+                🔬 Analyze Disease
+            </button>
+            <p class="hint">Analysis takes ~2 seconds</p>
+
+            <div class="divider"></div>
+            <div class="card-title" style="margin-bottom:12px;font-size:.9rem">Detectable Conditions</div>
+            <div class="tag-list">
+                {% for d in ['Early Blight','Late Blight','Powdery Mildew','Leaf Spot','Healthy Plant'] %}
+                <span class="tag">{{ d }}</span>{% endfor %}
+            </div>
+        </div>
+
+        <!-- Result panel -->
+        <div id="resultWrap">
+            <div class="card placeholder-card" id="placeholderCard">
+                <div style="text-align:center;padding:40px 0;color:var(--muted)">
+                    <div style="font-size:3.5rem;margin-bottom:16px">🌿</div>
+                    <div style="font-size:1.05rem;color:var(--text-2);margin-bottom:8px">Upload a leaf image to begin</div>
+                    <p style="font-size:.875rem;max-width:320px;margin:0 auto">AI will identify the disease, confidence score, treatment plan, and fertilizer recommendation.</p>
+                </div>
+            </div>
+
+            <div id="diseaseResult" style="display:none">
+                <div class="result-header card" id="resultHeader">
+                    <div class="rh-icon" id="rhIcon">🌿</div>
+                    <div style="flex:1">
+                        <div class="rh-name" id="rhName">--</div>
+                        <div class="rh-badges">
+                            <span class="badge" id="rhSeverity">--</span>
+                        </div>
+                        <div class="conf-wrap">
+                            <div class="conf-label"><span>AI Confidence</span><span id="confPct">0%</span></div>
+                            <div class="conf-bar"><div class="conf-fill" id="confFill" style="width:0%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="card">
+                        <div class="info-title">💊 Treatment</div>
+                        <p id="infoTreatment" class="info-text"></p>
+                    </div>
+                    <div class="card">
+                        <div class="info-title">🌱 Fertilizer</div>
+                        <p id="infoFertilizer" class="info-text"></p>
+                    </div>
+                    <div class="card" style="grid-column:1/-1">
+                        <div class="info-title">🛡️ Prevention</div>
+                        <p id="infoPrevention" class="info-text"></p>
+                    </div>
+                </div>
+
+                <button class="btn btn-ghost" style="width:100%;margin-top:16px" onclick="resetUpload()">🔄 Analyze Another Image</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/disease.js"></script>
+{% endblock %}

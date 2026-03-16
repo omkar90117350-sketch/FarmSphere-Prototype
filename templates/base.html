@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FarmSphere{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="/" class="nav-brand">
+            <span class="brand-icon">🌾</span>
+            <span class="brand-name">Farm<strong>Sphere</strong></span>
+        </a>
+        <button class="nav-burger" id="navBurger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dashboard"         {% if request.path=='/dashboard' %}class="active"{% endif %}>Dashboard</a></li>
+            <li><a href="/disease-diagnosis" {% if request.path=='/disease-diagnosis' %}class="active"{% endif %}>Disease AI</a></li>
+            <li><a href="/weather"           {% if request.path=='/weather' %}class="active"{% endif %}>Weather</a></li>
+            <li><a href="/price-prediction"  {% if request.path=='/price-prediction' %}class="active"{% endif %}>Prices</a></li>
+            <li><a href="/chatbot"           {% if request.path=='/chatbot' %}class="active"{% endif %} class="nav-cta">FarmBot</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main id="main">{% block content %}{% endblock %}</main>
+
+<script src="/static/js/main.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

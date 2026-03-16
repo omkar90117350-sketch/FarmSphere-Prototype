@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}FarmSphere — AI Smart Farming{% endblock %}
+{% block content %}
+
+<section class="hero">
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-inner">
+        <span class="hero-tag"><span class="dot"></span> AI-Powered Agriculture Platform</span>
+        <h1 class="hero-title">
+            <span>Smarter Farming</span>
+            <span class="gradient-text">Powered by AI</span>
+        </h1>
+        <p class="hero-desc">
+            FarmSphere combines satellite data, machine learning, and real-time weather intelligence
+            to help farmers make better decisions — from sowing to harvest.
+        </p>
+        <div class="hero-btns">
+            <a href="/dashboard" class="btn btn-primary">🚀 Open Dashboard</a>
+            <a href="/chatbot"   class="btn btn-ghost">💬 Talk to FarmBot</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hstat"><span class="hstat-val">5</span><span class="hstat-label">AI Modules</span></div>
+            <div class="hstat-divider"></div>
+            <div class="hstat"><span class="hstat-val">8+</span><span class="hstat-label">Crops Supported</span></div>
+            <div class="hstat-divider"></div>
+            <div class="hstat"><span class="hstat-val">Real-Time</span><span class="hstat-label">Data & Insights</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="modules-section">
+    <div class="section-head">
+        <div class="section-label">Platform Modules</div>
+        <h2 class="section-title">Everything a Modern Farmer Needs</h2>
+        <p class="section-sub">Five integrated AI tools working together to transform farm management.</p>
+    </div>
+
+    <div class="modules-grid">
+        <a href="/dashboard" class="mod-card">
+            <div class="mod-arrow">↗</div>
+            <div class="mod-icon">📊</div>
+            <div class="mod-name">Smart Dashboard</div>
+            <div class="mod-desc">Unified view of weather, market prices, crop health, and AI recommendations.</div>
+            <div class="mod-tags"><span>Real-Time</span><span>Charts</span><span>Insights</span></div>
+        </a>
+        <a href="/disease-diagnosis" class="mod-card">
+            <div class="mod-arrow">↗</div>
+            <div class="mod-icon">🔬</div>
+            <div class="mod-name">Disease Detection</div>
+            <div class="mod-desc">Upload a leaf photo and get instant AI diagnosis with treatment plan.</div>
+            <div class="mod-tags"><span>Computer Vision</span><span>Treatment Guide</span></div>
+        </a>
+        <a href="/weather" class="mod-card">
+            <div class="mod-arrow">↗</div>
+            <div class="mod-icon">🌦️</div>
+            <div class="mod-name">Weather Intelligence</div>
+            <div class="mod-desc">7-day forecasts with farming-specific alerts for spray, irrigate, harvest.</div>
+            <div class="mod-tags"><span>OpenWeatherMap</span><span>7-Day</span><span>Alerts</span></div>
+        </a>
+        <a href="/price-prediction" class="mod-card">
+            <div class="mod-arrow">↗</div>
+            <div class="mod-icon">💰</div>
+            <div class="mod-name">Price Prediction</div>
+            <div class="mod-desc">AI-powered price forecasting based on season, location, and market demand.</div>
+            <div class="mod-tags"><span>ML Model</span><span>MSP Analysis</span><span>Trends</span></div>
+        </a>
+        <a href="/chatbot" class="mod-card mod-card-featured">
+            <div class="mod-arrow">↗</div>
+            <div class="mod-icon">🤖</div>
+            <div class="mod-name">FarmBot AI Chatbot</div>
+            <div class="mod-desc">Your 24/7 farming expert powered by Gemini AI — ask anything about crops, diseases, soil, markets.</div>
+            <div class="mod-tags"><span>Gemini AI</span><span>Multilingual</span><span>24/7</span></div>
+        </a>
+    </div>
+</section>
+
+<section class="tech-bar">
+    <div class="tech-label">Built With</div>
+    <div class="tech-pills">
+        <span>🐍 Python Flask</span><span>🤖 Google Gemini</span>
+        <span>🌦️ OpenWeatherMap</span><span>📊 Chart.js</span>
+        <span>🧠 Scikit-learn</span><span>🖼️ Pillow / CV</span>
+        <span>🚀 Render</span>
+    </div>
+</section>
+{% endblock %}

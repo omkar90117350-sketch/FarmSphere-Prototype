@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Price Prediction — FarmSphere{% endblock %}
+{% block head %}<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div class="section-label">Market Intelligence</div>
+    <h1 class="page-title">Crop Price Prediction</h1>
+    <p class="page-subtitle">ML-powered price forecasting based on season, location, and historical market trends.</p>
+</div>
+
+<div class="container">
+    <div class="two-col">
+        <div class="card">
+            <div class="card-title" style="margin-bottom:20px">📊 Prediction Parameters</div>
+
+            <div class="form-group">
+                <label class="form-label">Crop</label>
+                <select class="form-input" id="cropSel">
+                    {% for name, info in crops.items() %}
+                    <option value="{{ name }}">{{ info.emoji }} {{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Market</label>
+                <select class="form-input" id="marketSel">
+                    {% for m in markets %}
+                    <option value="{{ m }}">{{ m }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Season</label>
+                <select class="form-input" id="seasonSel">
+                    <option value="Kharif">🌧️ Kharif (Jun–Nov)</option>
+                    <option value="Rabi">❄️ Rabi (Nov–Apr)</option>
+                    <option value="Zaid">☀️ Zaid (Apr–Jun)</option>
+                    <option value="Annual">📅 Annual</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" id="predictBtn" style="width:100%;padding:14px" onclick="predictPrice()">
+                📈 Predict Price
+            </button>
+
+            <div class="divider"></div>
+            <div class="card-title" style="font-size:.85rem;margin-bottom:10px">MSP Reference (₹/Q)</div>
+            {% for name, info in crops.items() %}
+            {% if info.msp > 0 %}
+            <div style="display:flex;justify-content:space-between;font-size:.82rem;padding:5px 0;border-bottom:1px solid var(--border)">
+                <span style="color:var(--muted)">{{ info.emoji }} {{ name }}</span>
+                <span style="color:var(--green-400);font-weight:600">₹{{ "{:,}".format(info.msp) }}</span>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div>
+            <div class="card placeholder-card" id="pricePlaceholder" style="text-align:center;padding:60px 20px">
+                <div style="font-size:3.5rem;margin-bottom:16px">📊</div>
+                <div style="font-size:1.05rem;color:var(--text-2);margin-bottom:8px">Select parameters to predict price</div>
+                <p style="font-size:.875rem;color:var(--muted);max-width:320px;margin:0 auto">AI will forecast the crop price with trend analysis and market recommendation.</p>
+            </div>
+
+            <div id="priceResult" style="display:none">
+                <div class="card price-hero">
+                    <div>
+                        <div class="section-label">Predicted Price</div>
+                        <div class="price-big" id="priceBig">₹--</div>
+                        <div class="price-context" id="priceCtx">--</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div class="badge" id="priceBadge">--</div>
+                        <div style="font-size:.8rem;color:var(--muted);margin-top:8px">vs MSP: <span id="vsMSP" style="font-weight:700">--</span></div>
+                    </div>
+                </div>
+                <div class="alert" id="priceInsight" style="margin:16px 0"></div>
+                <div class="card">
+                    <div class="card-title" id="trendTitle" style="margin-bottom:4px">Annual Price Trend</div>
+                    <div class="card-sub">Monthly forecast ₹/quintal</div>
+                    <canvas id="trendChart" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/price.js"></script>
+{% endblock %}
